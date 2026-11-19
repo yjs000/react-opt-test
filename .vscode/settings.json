@@ -1,6 +1,18 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "typescript.suggest.autoImports": true,
+  "typescript.suggest.includeCompletionsForModuleExports": true,
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "javascript.suggest.autoImports": true,
+  "javascript.suggest.includeCompletionsForModuleExports": true,
+  "javascript.preferences.includePackageJsonAutoImports": "on",
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true

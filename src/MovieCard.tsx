@@ -1,36 +1,33 @@
-import type { TmdbMovie } from './movies/tmdb.types'
+import type { Movie } from './movies/movie.types'
 
-function MovieCard({
-  title,
-  poster_path,
-  vote_average,
-  original_language,
-  release_date,
-}: TmdbMovie) {
+type MovieCardProps = {
+  movie: Movie
+}
+
+export const MovieCard = ({ movie }: MovieCardProps) => {
   return (
     <article className="h-full rounded-2xl border border-white/10 bg-panel p-3 sm:p-4">
       <div className="aspect-[2/3] overflow-hidden rounded-lg bg-poster">
-        {poster_path && (
+        {movie.posterPath && (
           <img
-            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+            src={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
             alt=""
             className="size-full object-cover"
           />
         )}
       </div>
-      <h3 className="mt-4 font-semibold">{title}</h3>
+      <h3 className="mt-4 font-semibold">{movie.title}</h3>
       <p className="mt-2 text-sm text-muted">
         <span className="font-semibold text-white">
           <span aria-hidden="true" className="text-amber-300">
             ★{' '}
           </span>
           <span className="sr-only">Rating </span>
-          {vote_average?.toFixed(1) ?? '-'}
+          {movie.voteAverage?.toFixed(1) ?? '-'}
         </span>
         {' · '}
-        {original_language?.toUpperCase() ?? '-'}
-        {' · '}
-        {release_date && ` · ${release_date.slice(0, 4)}`}
+        {movie.originalLanguage?.toUpperCase() ?? '-'}
+        {movie.releaseDate && ` · ${movie.releaseDate.slice(0, 4)}`}
       </p>
     </article>
   )

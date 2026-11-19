@@ -1,3 +1,4 @@
+// src/movies/tmdb.types.ts
 export type TmdbMovie = {
   id: number
   title: string

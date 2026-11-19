@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import MovieBoard from './MovieBoard'
+import MovieBoard from '@/MovieBoard'
 
 const queryClient = new QueryClient()
 
