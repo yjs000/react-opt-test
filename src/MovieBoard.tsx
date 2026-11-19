@@ -4,13 +4,17 @@ import MovieCard from '@/MovieCard'
 import { movieListOptions } from '@/movies/movie.quries'
 import SearchBar from './SearchBar'
 import { useState } from 'react'
+import type { MovieSort } from '@/movies/movie.types'
+import { sortMovies } from '@/movies/movie.utils'
 
 const MovieBoard = () => {
   const [searchTerm, setSearchTerm] = useState('t')
+  const [sortBy, setSortBy] = useState<MovieSort>('original')
   const { data: movies = [] } = useQuery(movieListOptions())
   const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(searchTerm.toLowerCase()),
   )
+  const sortedMovies = sortMovies(filteredMovies, sortBy)
   const onChangeSearchTerm = (value: string) => {
     setSearchTerm(value)
   }
@@ -26,8 +30,29 @@ const MovieBoard = () => {
           <h2 id="movies-heading" className="text-2xl font-bold sm:text-3xl">
             All Movies
           </h2>
+          <label className="mt-4 flex items-center gap-3 text-sm text-muted">
+            정렬
+            <select
+              value={sortBy}
+              onChange={(event) => {
+                const value = event.currentTarget.value
+                if (
+                  value === 'original' ||
+                  value === 'title' ||
+                  value === 'rating'
+                ) {
+                  setSortBy(value)
+                }
+              }}
+              className="rounded-lg border border-white/10 bg-panel px-3 py-2 text-white"
+            >
+              <option value="original">기본순</option>
+              <option value="title">제목순 (오름차순)</option>
+              <option value="rating">평점순 (높은 순)</option>
+            </select>
+          </label>
           <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
-            {filteredMovies.map((movie) => (
+            {sortedMovies.map((movie) => (
               <li key={movie.id}>
                 <MovieCard movie={movie} />
               </li>
