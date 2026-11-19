@@ -1,10 +1,8 @@
 import { queryOptions } from '@tanstack/react-query'
-import { searchMovies, type SearchMoviesParams } from './movie.api'
-import { env } from '@/config/env'
+import { getMovies } from './movie.api'
 
-export const movieSearchOptions = (params: SearchMoviesParams) =>
+export const movieListOptions = () =>
   queryOptions({
-    queryKey: ['movie', 'search', params],
-    enabled: Boolean(env.tmdbApiKey),
-    queryFn: () => searchMovies(params),
+    queryKey: ['movies', 'list'],
+    queryFn: getMovies,
   })

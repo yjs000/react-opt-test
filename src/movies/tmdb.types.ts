@@ -9,5 +9,8 @@ export type TmdbMovie = {
 }
 
 export type TmdbSearchResponse = {
+  page: number
   results: TmdbMovie[]
+  total_pages: number
+  total_results: number
 }

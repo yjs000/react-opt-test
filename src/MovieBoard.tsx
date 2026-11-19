@@ -1,14 +1,16 @@
 import { Header } from '@/Header'
 import { useQuery } from '@tanstack/react-query'
 import MovieCard from '@/MovieCard'
-import { movieSearchOptions } from '@/movies/movie.quries'
+import { movieListOptions } from '@/movies/movie.quries'
 import SearchBar from './SearchBar'
-import { useState, type ChangeEvent } from 'react'
+import { useState } from 'react'
 
 const MovieBoard = () => {
   const [searchTerm, setSearchTerm] = useState('t')
-  const { data: movies = [] } = useQuery(movieSearchOptions({ searchTerm }))
-
+  const { data: movies = [] } = useQuery(movieListOptions())
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
   const onChangeSearchTerm = (value: string) => {
     setSearchTerm(value)
   }
@@ -25,7 +27,7 @@ const MovieBoard = () => {
             All Movies
           </h2>
           <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
-            {movies.map((movie) => (
+            {filteredMovies.map((movie) => (
               <li key={movie.id}>
                 <MovieCard movie={movie} />
               </li>
