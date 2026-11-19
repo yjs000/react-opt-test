@@ -1,4 +1,9 @@
-const SearchBar = () => {
+type SearchBarProps = {
+  searchTerm: string
+  onChangeSearchTerm: (searchTerm: string) => void
+}
+
+const SearchBar = ({ searchTerm, onChangeSearchTerm }: SearchBarProps) => {
   return (
     <label className="mx-auto mt-8 flex max-w-3xl items-center gap-3 rounded-xl bg-panel px-4 focus-within:ring-2 focus-within:ring-accent sm:mt-10">
       <svg
@@ -18,6 +23,8 @@ const SearchBar = () => {
         type="search"
         placeholder="Search through thousands of movies"
         className="min-w-0 flex-1 py-4 text-sm outline-none placeholder:text-muted sm:text-base"
+        onChange={(event) => onChangeSearchTerm(event.currentTarget.value)}
+        value={searchTerm}
       />
     </label>
   )
