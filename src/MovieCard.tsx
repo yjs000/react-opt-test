@@ -1,10 +1,11 @@
+import { memo } from 'react'
 import type { Movie } from './movies/movie.types'
 
 type MovieCardProps = {
   movie: Movie
 }
 
-export const MovieCard = ({ movie }: MovieCardProps) => {
+export const MovieCard = memo(({ movie }: MovieCardProps) => {
   return (
     <article className="h-full rounded-2xl border border-white/10 bg-panel p-3 sm:p-4">
       <div className="aspect-[2/3] overflow-hidden rounded-lg bg-poster">
@@ -31,6 +32,6 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
       </p>
     </article>
   )
-}
+})
 
 export default MovieCard

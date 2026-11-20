@@ -13,8 +13,8 @@
 ## 1차 해결방향
 
 1. memo, usecallback등의 최적화를 시도한다. movieCard의 내용은 변하지 않지만, 객체가 계속 재생성되고있다.
-1. lazy loading을 사용한다.
-1. debounce를 사용한다.
+2. 이미지 lazy loading을 사용한다.
+3. SearchBar debouncing을 적용한다.
 
 ## 측정 기록
 

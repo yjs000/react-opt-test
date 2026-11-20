@@ -3,21 +3,27 @@ import { useQuery } from '@tanstack/react-query'
 import MovieCard from '@/MovieCard'
 import { movieListOptions } from '@/movies/movie.quries'
 import SearchBar from './SearchBar'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import type { MovieSort } from '@/movies/movie.types'
 import { sortMovies } from '@/movies/movie.utils'
 
 const MovieBoard = () => {
   const [searchTerm, setSearchTerm] = useState('t')
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('t')
   const [sortBy, setSortBy] = useState<MovieSort>('original')
+
+  const onChangeSearchTerm = useCallback((value: string) => {
+    setTimeout(() => setDebouncedSearchTerm(value), 300)
+    setSearchTerm(value)
+  }, [])
+
   const { data: movies = [] } = useQuery(movieListOptions())
+
   const filteredMovies = movies.filter((movie) =>
-    movie.title.toLowerCase().includes(searchTerm.toLowerCase()),
+    movie.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase()),
   )
   const sortedMovies = sortMovies(filteredMovies, sortBy)
-  const onChangeSearchTerm = (value: string) => {
-    setSearchTerm(value)
-  }
+
   return (
     <main className="min-h-screen bg-canvas text-white [color-scheme:dark]">
       <div className="mx-auto max-w-7xl px-4 pb-12 pt-14 sm:px-8 sm:pt-20">
