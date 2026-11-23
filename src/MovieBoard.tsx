@@ -1,6 +1,5 @@
 import { Header } from '@/Header'
 import { useQuery } from '@tanstack/react-query'
-import MovieCard from '@/MovieCard'
 import { movieListOptions } from '@/movies/movie.quries'
 import SearchBar from './SearchBar'
 import { useEffect, useMemo, useState } from 'react'
