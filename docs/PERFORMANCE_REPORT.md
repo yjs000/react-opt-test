@@ -18,50 +18,129 @@
 | 데이터      | `src/data/movies.json`, 7,956개 |
 | 초기 검색어 | `t`                             |
 
-## 3. 측정 결과 종합표
+## 3. 총 지표
 
-### 3.1. 총 지표
+CSR 기본(`654b4b7`)과 CSR 최적화(`1f541f7`)를 별도 Chrome 157 창에서 비교했다. 동일한 영화 데이터, 1280 × 800 CSS 픽셀, DPR 1, HTTP 캐시 비활성화, 포스터 요청 차단 조건이다. 프로덕션 빌드를 사용했고 React 렌더 시간만 같은 방식의 별도 프로파일링 빌드에서 계측했다. 회차마다 버전 실행 순서를 바꾼 3쌍의 중앙값이다. 횟수는 전체 3회 중 관찰된 횟수다.
 
-CSR 기본은 2026-11-19에 정렬 기능을 추가하기 전에 한 번 기록한 값이다. CSR 최적화는 `1f541f7`에서 새로 측정한 3회 중앙값이다. 두 열의 로딩·입력 지표는 측정 조건이 달라 같은 조건의 개선율은 §3.2에서 확인한다.
+<table>
+  <thead>
+    <tr>
+      <th colspan="2" scope="colgroup">지표</th>
+      <th scope="col" align="right">CSR 기본</th>
+      <th scope="col" align="right">CSR 최적화</th>
+      <th scope="col" align="right">Next 기본</th>
+      <th scope="col" align="right">Next 최적화</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="rowgroup" rowspan="4">초기 로딩</th>
+      <th scope="row">목록 표시</th>
+      <td align="right">2,468.7 ms</td>
+      <td align="right"><strong>819.4 ms</strong></td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+    <tr>
+      <th scope="row">LCP</th>
+      <td align="right"><strong>0.076 s</strong></td>
+      <td align="right">0.080 s</td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+    <tr>
+      <th scope="row">CLS</th>
+      <td align="right"><strong>0.001</strong></td>
+      <td align="right">0.193</td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+    <tr>
+      <th scope="row">TBT (FCP~탐색 후 8초)</th>
+      <td align="right">2,074.0 ms</td>
+      <td align="right"><strong>2,037.0 ms</strong></td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th scope="rowgroup" rowspan="4">검색어 삭제 후 60 ms</th>
+      <th scope="row">첫 글자 반영</th>
+      <td align="right">2,360.5 ms</td>
+      <td align="right"><strong>19.4 ms</strong></td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+    <tr>
+      <th scope="row">가장 느린 글자 반영</th>
+      <td align="right">2,360.5 ms</td>
+      <td align="right"><strong>19.4 ms</strong></td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+    <tr>
+      <th scope="row">전체 목록이 다시 표시된 횟수</th>
+      <td align="right">3/3회</td>
+      <td align="right"><strong>0/3회</strong></td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+    <tr>
+      <th scope="row">첫 글자 요청부터 최종 결과 표시까지</th>
+      <td align="right">2,360.5 ms</td>
+      <td align="right"><strong>546.4 ms</strong></td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th scope="rowgroup" rowspan="4">검색어 삭제 후 220 ms</th>
+      <th scope="row">첫 글자 반영</th>
+      <td align="right">2,304.6 ms</td>
+      <td align="right"><strong>648.8 ms</strong></td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+    <tr>
+      <th scope="row">전체 목록이 다시 표시된 횟수</th>
+      <td align="right">3/3회</td>
+      <td align="right">3/3회</td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+    <tr>
+      <th scope="row">마지막 글자 처리 후 최종 결과 표시</th>
+      <td align="right"><strong>103.3 ms</strong></td>
+      <td align="right">636.0 ms</td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+    <tr>
+      <th scope="row">첫 글자 요청부터 최종 결과 표시까지</th>
+      <td align="right">2,304.6 ms</td>
+      <td align="right"><strong>1,215.8 ms</strong></td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th scope="rowgroup">빠른 검색어 교체</th>
+      <th scope="row">React 렌더링 시간 합계</th>
+      <td align="right">163.4 ms</td>
+      <td align="right"><strong>3.6 ms</strong></td>
+      <td align="right">—</td>
+      <td align="right">—</td>
+    </tr>
+  </tbody>
+</table>
 
-| 지표                                          |  CSR 기본 | CSR 최적화 | Next 기본 | Next 최적화 |
-| --------------------------------------------- | --------: | ---------: | --------: | ----------: |
-| LCP                                           |     1.3 s |    0.100 s |         — |           — |
-| CLS                                           |         0 |      0.193 |         — |           — |
-| TBT (최적화는 FCP~탐색 8초)                   |  3,650 ms | 1,964.0 ms |         — |           — |
-| Performance 패널의 INP 표시 / 실험실 INP 후보 |    556 ms |   1,416 ms |         — |           — |
-| 선택한 키보드 상호작용의 지연                 | 556.23 ms |   1,416 ms |         — |           — |
-| Input delay                                   |      4 ms | 1,175.4 ms |         — |           — |
-| Processing duration                           |    486 ms |     0.1 ms |         — |           — |
-| Presentation delay                            |     66 ms |   240.5 ms |         — |           — |
-| React 기록의 커밋 수                          |         6 |          8 |         — |           — |
-| React 기록의 최대 렌더링 시간                 |  362.5 ms |   131.0 ms |         — |           — |
+- **초기 로딩**은 첫 8초를 관찰했다. 목록 표시는 초기 7,697개가 DOM에 반영된 뒤 두 번째 프레임 콜백이다. LCP는 구간 내 마지막 후보이며 기본은 `H1`, 최적화는 `H1`이었다. CLS는 구간 내 최대 세션 창 점수다. TBT는 FCP부터 탐색 후 8초까지 긴 작업에서 50 ms를 초과한 부분의 합이다. [web.dev TBT](https://web.dev/articles/tbt)
+- **검색어 교체**는 `tiger`로 시작해 새로고침 없이 두 단어로 차례로 바꿨다. 회차별 다음 두 단어는 `ice → woman`, `woman → night`, `night → ice`다. 입력을 전부 지운 뒤 첫 글자는 각각 60 ms와 220 ms에, 이어지는 글자는 90 ms 간격으로 요청했다. 글자 반영은 해당 키 명령 요청부터 `input` 이벤트 후 두 번째 프레임까지, 최종 결과 표시는 기대한 목록 개수를 확인한 뒤 두 번째 프레임까지의 근사치다. 마지막 글자 처리 후부터 잰 값에는 그 글자의 처리 전 대기가 들어가지 않는다.
+- **React 렌더링 시간 합계**는 `tiger` 결과에서 첫 번째 단어로 빠르게 교체하는 동안 기록된 모든 커밋의 `actualDuration` 합이다. 초창기 버전은 입력과 결과 갱신이 결합돼 있어 두 버전 모두 검색 결과 렌더를 포함했다. DOM 커밋과 브라우저의 스타일 계산·레이아웃 시간은 포함하지 않는다. [React Profiler](https://react.dev/reference/react/Profiler)
 
-- **최적화 로딩**은 Chrome 157, 1280 × 800 CSS 픽셀, 캐시 비활성화, 포스터 요청 차단 상태에서 최초 8초를 관찰했다. LCP 요소는 `H1`이었다. CLS는 이 구간의 최대 세션 창 점수다. TBT는 FCP 이후 관찰 종료까지 긴 작업에서 50 ms를 초과한 부분의 합이며, Lighthouse의 기본 측정 창과 다르다. [web.dev TBT](https://web.dev/articles/tbt)
-- **최적화 입력**은 `tiger`를 전체 삭제하고 220 ms 뒤 `woman`을 입력하는 동안 Event Timing에서 가장 느린 키보드 이벤트를 선택했다. 소수의 실험실 상호작용에서 얻은 INP 후보이며, 단계별 시간은 선택한 이벤트의 분해값이다. 다음 프레임까지의 전체 지연은 브라우저가 반올림하며, 개별 중앙값의 합과 다를 수 있다. [web.dev INP](https://web.dev/articles/inp)
-- **최적화 React 지표**는 같은 검색 교체를 별도의 프로덕션 프로파일링 빌드에서 측정했다. 커밋 수와 각 회차 최대 `actualDuration`의 중앙값을 기록했다. [React Profiler](https://react.dev/reference/react/Profiler)
-
-### 3.2. 초기 로딩 및 연속 검색어 교체 재측정
-
-별도 Chrome 157 창에서 동일 데이터, 1280 × 800 CSS 픽셀, 포스터 요청 차단, HTTP 캐시 비활성화 조건으로 두 프로덕션 빌드를 세 쌍 비교했다. `tiger`에서 시작해 전체 삭제 후 `ice`, `woman`, `night`로 순서를 바꿔 가며 검색했다. 표는 중앙값이다.
-
-220ms : 검색어를 지운 뒤 150 ms가 넘도록 쉬었다가 다시 입력하는 상황
-
-| 지표                                                  |   CSR 기본 | CSR 최적화 | Next 기본 | Next 최적화 |
-| ----------------------------------------------------- | ---------: | ---------: | --------: | ----------: |
-| 초기 목록 전체 표시                                   | 2,397.6 ms |   761.8 ms |         — |           — |
-| 삭제 60 ms 뒤 재입력 · 첫 글자 반영                   | 5,852.5 ms |    26.5 ms |         — |           — |
-| 삭제 60 ms 뒤 재입력 · 가장 느린 글자 반영            | 5,852.5 ms |    33.8 ms |         — |           — |
-| 삭제 60 ms 뒤 재입력 · 마지막 글자에서 최종 결과까지  |    73.7 ms |   194.4 ms |         — |           — |
-| 삭제 220 ms 뒤 재입력 · 첫 글자 반영                  | 5,853.9 ms |   455.1 ms |         — |           — |
-| 삭제 220 ms 뒤 재입력 · 가장 느린 글자 반영           | 5,853.9 ms |   455.1 ms |         — |           — |
-| 삭제 220 ms 뒤 재입력 · 마지막 글자에서 최종 결과까지 |    21.1 ms |   546.3 ms |         — |           — |
-| 삭제 220 ms 뒤 재입력 · 첫 글자의 입력 이벤트 전 대기 | 5,554.3 ms |   387.7 ms |         — |           — |
-| 삭제 220 ms 뒤 재입력 · 스타일 재계산                 | 4,379.7 ms |    44.7 ms |         — |           — |
-| 삭제 220 ms 뒤 재입력 · 레이아웃                      |   703.3 ms |    50.7 ms |         — |           — |
-| 삭제 60 ms 뒤 재입력 · 빈 검색어 결과 반영 횟수       |      6/6회 |      0/6회 |         — |           — |
-| 삭제 220 ms 뒤 재입력 · 빈 검색어 결과 반영 횟수      |      3/3회 |      3/3회 |         — |           — |
-
-첫 글자 반영은 키 입력 명령을 보낸 시점부터 `input` 이벤트 후 두 번째 프레임 콜백까지의 근사치다. 마지막 글자에서 최종 결과까지는 마지막 `input` 이벤트부터 측정하므로, 마지막 글자가 처리되기 전의 대기 시간은 포함하지 않는다. 초기 목록 표시는 LCP와 측정 기준이 다르다.
+연속 입력이 빠르면 현재 버전은 빈 검색어 때문에 전체 목록을 다시 그리는 일을 줄인다. 잠깐 쉬는 220 ms 조건은 현재 버전에도 전체 목록 갱신이 남는 재현 시나리오다. 초창기 단일 탐색 기록과 현재의 별도 INP 후보는 측정 동작이 달라 이 비교표의 수치에서 제외했다.
 
 상세 과정: [CSR 최적화](performance/csr-opt.md).
