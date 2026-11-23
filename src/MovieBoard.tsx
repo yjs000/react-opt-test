@@ -10,6 +10,7 @@ import {
   type MovieSort,
 } from '@/movies/movie.types'
 import { sortMovies } from '@/movies/movie.utils'
+import MovieList from './MovieList'
 
 const INITIAL_SEARCH_TERM = 't'
 const EMPTY_MOVIES: Movie[] = []
@@ -92,13 +93,7 @@ const MovieBoard = () => {
               ))}
             </select>
           </label>
-          <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
-            {sortedMovies.map((movie) => (
-              <li key={movie.id}>
-                <MovieCard movie={movie} />
-              </li>
-            ))}
-          </ul>
+          <MovieList movies={sortedMovies} />
         </section>
       </div>
     </main>
