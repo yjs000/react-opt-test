@@ -8,12 +8,6 @@
   --color-muted: #aaa7be;
 }
 
-.movie-list-item {
-  container-type: inline-size;
-}
-
 .movie-list-item > article {
   content-visibility: auto;
-  /* Estimate the 2:3 poster and text area, accounting for the card padding. */
-  contain-intrinsic-block-size: auto calc(150cqi + 1.75rem);
 }
