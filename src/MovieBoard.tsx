@@ -31,7 +31,7 @@ const MovieBoard = () => {
   useEffect(() => {
     const timer = window.setTimeout(
       () => setDebouncedSearchTerm(searchTerm),
-      300,
+      150,
     )
     return () => window.clearTimeout(timer)
   }, [searchTerm])

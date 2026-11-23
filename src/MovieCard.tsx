@@ -14,6 +14,7 @@ export const MovieCard = memo(({ movie }: MovieCardProps) => {
             src={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
             alt=""
             className="size-full object-cover"
+            loading="lazy"
           />
         )}
       </div>
