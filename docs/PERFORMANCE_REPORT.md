@@ -56,7 +56,7 @@ CSR 기본(`654b4b7`)과 CSR 최적화(`1f541f7`)를 별도 Chrome 157 창에서
       <td align="right">—</td>
     </tr>
     <tr>
-      <th scope="row">TBT (FCP~탐색 후 8초)</th>
+      <th scope="row">TBT (FCP~8초간)</th>
       <td align="right">2,074.0 ms</td>
       <td align="right"><strong>2,037.0 ms</strong></td>
       <td align="right">—</td>
@@ -137,7 +137,7 @@ CSR 기본(`654b4b7`)과 CSR 최적화(`1f541f7`)를 별도 Chrome 157 창에서
   </tbody>
 </table>
 
-- **초기 로딩**은 첫 8초를 관찰했다. 목록 표시는 초기 7,697개가 DOM에 반영된 뒤 두 번째 프레임 콜백이다. LCP는 구간 내 마지막 후보이며 기본은 `H1`, 최적화는 `H1`이었다. CLS는 구간 내 최대 세션 창 점수다. TBT는 FCP부터 탐색 후 8초까지 긴 작업에서 50 ms를 초과한 부분의 합이다. [web.dev TBT](https://web.dev/articles/tbt)
+- **초기 로딩**을 분석하기 위해 처음부터 약 8초간 관찰했다. 목록 표시는 초기 7,697개가 DOM에 반영된 뒤 두 번째 프레임 콜백이다. LCP는 구간 내 마지막 후보이며 기본은 `H1`, 최적화는 `H1`이었다. CLS는 구간 내 최대 세션 창 점수다. TBT는 FCP부터 탐색 후 8초까지 긴 작업에서 50 ms를 초과한 부분의 합이다. [web.dev TBT](https://web.dev/articles/tbt)
 - **검색어 교체**는 `tiger`로 시작해 새로고침 없이 두 단어로 차례로 바꿨다. 회차별 다음 두 단어는 `ice → woman`, `woman → night`, `night → ice`다. 입력을 전부 지운 뒤 첫 글자는 각각 60 ms와 220 ms에, 이어지는 글자는 90 ms 간격으로 요청했다. 글자 반영은 해당 키 명령 요청부터 `input` 이벤트 후 두 번째 프레임까지, 최종 결과 표시는 기대한 목록 개수를 확인한 뒤 두 번째 프레임까지의 근사치다. 마지막 글자 처리 후부터 잰 값에는 그 글자의 처리 전 대기가 들어가지 않는다.
 - **React 렌더링 시간 합계**는 `tiger` 결과에서 첫 번째 단어로 빠르게 교체하는 동안 기록된 모든 커밋의 `actualDuration` 합이다. 초창기 버전은 입력과 결과 갱신이 결합돼 있어 두 버전 모두 검색 결과 렌더를 포함했다. DOM 커밋과 브라우저의 스타일 계산·레이아웃 시간은 포함하지 않는다. [React Profiler](https://react.dev/reference/react/Profiler)
 
