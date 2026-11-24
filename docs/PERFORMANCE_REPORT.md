@@ -22,6 +22,8 @@
 
 CSR 기본(`654b4b7`)과 CSR 최적화(`1f541f7`)를 별도 Chrome 157 창에서 비교했다. 동일한 영화 데이터, 1280 × 800 CSS 픽셀, DPR 1, HTTP 캐시 비활성화, 포스터 요청 차단 조건이다. 프로덕션 빌드를 사용했고 React 렌더 시간만 같은 방식의 별도 프로파일링 빌드에서 계측했다. 회차마다 버전 실행 순서를 바꾼 3쌍의 중앙값이다. 횟수는 전체 3회 중 관찰된 횟수다.
 
+<p align="right">단위: ms (CLS는 단위 없음, 횟수는 회)</p>
+
 <table>
   <thead>
     <tr>
@@ -36,15 +38,15 @@ CSR 기본(`654b4b7`)과 CSR 최적화(`1f541f7`)를 별도 Chrome 157 창에서
     <tr>
       <th scope="rowgroup" rowspan="4">초기 로딩</th>
       <th scope="row">목록 표시</th>
-      <td align="right">2,468.7 ms</td>
-      <td align="right"><strong>819.4 ms</strong></td>
+      <td align="right">2,468.7</td>
+      <td align="right"><strong>819.4</strong></td>
       <td align="right">—</td>
       <td align="right">—</td>
     </tr>
     <tr>
       <th scope="row">LCP</th>
-      <td align="right"><strong>0.076 s</strong></td>
-      <td align="right">0.080 s</td>
+      <td align="right"><strong>76</strong></td>
+      <td align="right">80</td>
       <td align="right">—</td>
       <td align="right">—</td>
     </tr>
@@ -56,9 +58,9 @@ CSR 기본(`654b4b7`)과 CSR 최적화(`1f541f7`)를 별도 Chrome 157 창에서
       <td align="right">—</td>
     </tr>
     <tr>
-      <th scope="row">TBT (FCP~8초간)</th>
-      <td align="right">2,074.0 ms</td>
-      <td align="right"><strong>2,037.0 ms</strong></td>
+      <th scope="row">TBT (FCP~8,000 ms)</th>
+      <td align="right">2,074.0</td>
+      <td align="right"><strong>2,037.0</strong></td>
       <td align="right">—</td>
       <td align="right">—</td>
     </tr>
@@ -67,15 +69,15 @@ CSR 기본(`654b4b7`)과 CSR 최적화(`1f541f7`)를 별도 Chrome 157 창에서
     <tr>
       <th scope="rowgroup" rowspan="4">검색어 삭제 후 60 ms</th>
       <th scope="row">첫 글자 반영</th>
-      <td align="right">2,360.5 ms</td>
-      <td align="right"><strong>19.4 ms</strong></td>
+      <td align="right">2,360.5</td>
+      <td align="right"><strong>19.4</strong></td>
       <td align="right">—</td>
       <td align="right">—</td>
     </tr>
     <tr>
       <th scope="row">가장 느린 글자 반영</th>
-      <td align="right">2,360.5 ms</td>
-      <td align="right"><strong>19.4 ms</strong></td>
+      <td align="right">2,360.5</td>
+      <td align="right"><strong>19.4</strong></td>
       <td align="right">—</td>
       <td align="right">—</td>
     </tr>
@@ -88,8 +90,8 @@ CSR 기본(`654b4b7`)과 CSR 최적화(`1f541f7`)를 별도 Chrome 157 창에서
     </tr>
     <tr>
       <th scope="row">첫 글자 요청부터 최종 결과 표시까지</th>
-      <td align="right">2,360.5 ms</td>
-      <td align="right"><strong>546.4 ms</strong></td>
+      <td align="right">2,360.5</td>
+      <td align="right"><strong>546.4</strong></td>
       <td align="right">—</td>
       <td align="right">—</td>
     </tr>
@@ -98,8 +100,8 @@ CSR 기본(`654b4b7`)과 CSR 최적화(`1f541f7`)를 별도 Chrome 157 창에서
     <tr>
       <th scope="rowgroup" rowspan="4">검색어 삭제 후 220 ms</th>
       <th scope="row">첫 글자 반영</th>
-      <td align="right">2,304.6 ms</td>
-      <td align="right"><strong>648.8 ms</strong></td>
+      <td align="right">2,304.6</td>
+      <td align="right"><strong>648.8</strong></td>
       <td align="right">—</td>
       <td align="right">—</td>
     </tr>
@@ -112,15 +114,15 @@ CSR 기본(`654b4b7`)과 CSR 최적화(`1f541f7`)를 별도 Chrome 157 창에서
     </tr>
     <tr>
       <th scope="row">마지막 글자 처리 후 최종 결과 표시</th>
-      <td align="right"><strong>103.3 ms</strong></td>
-      <td align="right">636.0 ms</td>
+      <td align="right"><strong>103.3</strong></td>
+      <td align="right">636.0</td>
       <td align="right">—</td>
       <td align="right">—</td>
     </tr>
     <tr>
       <th scope="row">첫 글자 요청부터 최종 결과 표시까지</th>
-      <td align="right">2,304.6 ms</td>
-      <td align="right"><strong>1,215.8 ms</strong></td>
+      <td align="right">2,304.6</td>
+      <td align="right"><strong>1,215.8</strong></td>
       <td align="right">—</td>
       <td align="right">—</td>
     </tr>
@@ -129,8 +131,8 @@ CSR 기본(`654b4b7`)과 CSR 최적화(`1f541f7`)를 별도 Chrome 157 창에서
     <tr>
       <th scope="rowgroup">빠른 검색어 교체</th>
       <th scope="row">React 렌더링 시간 합계</th>
-      <td align="right">163.4 ms</td>
-      <td align="right"><strong>3.6 ms</strong></td>
+      <td align="right">163.4</td>
+      <td align="right"><strong>3.6</strong></td>
       <td align="right">—</td>
       <td align="right">—</td>
     </tr>
